@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 import InputField from '../Components/InputField';
+import Checkbox from '../Components/Checkbox';
 
 const StartScreen = ({
-    name, setName, email, setEmail, phone, setPhone,
+    name, setName, email, setEmail, phone, setPhone, isCheckboxChecked, setIsCheckboxChecked,
     isValidName, isValidEmail, isValidPhone
   }) => {
     return (
@@ -29,6 +30,10 @@ const StartScreen = ({
           isValid={isValidPhone}
           errorMessage="Enter a valid phone number (10 digits, last digit not 0 or 1)"
         />
+        <Checkbox
+        isChecked={isCheckboxChecked}
+        setIsChecked={setIsCheckboxChecked}
+      />
         </View>
         
     );

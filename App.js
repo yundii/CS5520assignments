@@ -9,6 +9,7 @@ export default function App() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const isValidName = name.length > 1 && isNaN(name);
   const isValidEmail = email.includes('@') && email.includes('.');
@@ -26,6 +27,8 @@ export default function App() {
           isValidName={isValidName}
           isValidEmail={isValidEmail}
           isValidPhone={isValidPhone}
+          isCheckboxChecked={isCheckboxChecked}
+          setIsCheckboxChecked={setIsCheckboxChecked}
         />
       <StatusBar style="auto" />
     </View>
