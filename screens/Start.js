@@ -5,7 +5,7 @@ import Checkbox from '../Components/Checkbox';
 
 const StartScreen = ({
     name, setName, email, setEmail, phone, setPhone, isCheckboxChecked, setIsCheckboxChecked,
-    isValidName, isValidEmail, isValidPhone
+    isValidName, isValidEmail, isValidPhone, handleRegister, handleReset,
   }) => {
     return (
         <View style={styles.card}>
@@ -33,7 +33,15 @@ const StartScreen = ({
         <Checkbox
         isChecked={isCheckboxChecked}
         setIsChecked={setIsCheckboxChecked}
-      />
+        />
+        <View style={styles.buttonContainer}>
+        <Button title="Reset" onPress={handleReset} />
+        <Button
+          title="Register"
+          onPress={handleRegister}
+          disabled={!isCheckboxChecked}
+        />
+        </View>
         </View>
         
     );
@@ -50,6 +58,11 @@ const StartScreen = ({
         elevation: 5,
         backgroundColor: '#fff',
         marginBottom: 20,
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
       },
   });
   

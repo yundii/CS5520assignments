@@ -15,6 +15,21 @@ export default function App() {
   const isValidEmail = email.includes('@') && email.includes('.');
   const isValidPhone = phone.length === 10 && !isNaN(phone) && phone[9] !== '0' && phone[9] !== '1';
 
+  const handleRegister = () => {
+    if (isValidName && isValidEmail && isValidPhone) {
+      setCurrentScreen('confirm');
+    } else {
+      Alert.alert('Error', 'Please fill in all fields correctly.');
+    }
+  };
+
+  const handleReset = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setIsCheckboxChecked(false);
+  };
+
   return (
     <View style={styles.container}>
       <Start
@@ -29,6 +44,8 @@ export default function App() {
           isValidPhone={isValidPhone}
           isCheckboxChecked={isCheckboxChecked}
           setIsCheckboxChecked={setIsCheckboxChecked}
+          handleRegister={handleRegister}
+          handleReset={handleReset}
         />
       <StatusBar style="auto" />
     </View>
