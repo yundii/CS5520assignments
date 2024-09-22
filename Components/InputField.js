@@ -5,11 +5,13 @@ import ErrorText from './ErrorText';
 const InputField = ({ label, value, onChangeText, isValid, errorMessage }) => {
   return (
     <View style={styles.inputContainer}>
-      <Text>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
+        placeholder={label}
+        placeholderTextColor="#999"
       />
       {!isValid && <ErrorText>{errorMessage}</ErrorText>}
     </View>
@@ -21,10 +23,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomWidth: 2,
+    borderBottomColor: '#1976d2',
     padding: 8,
     marginTop: 5,
+  },
+  label: {
+    fontSize: 18,
+    color: '#1976d2',
   },
 });
 

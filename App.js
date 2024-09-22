@@ -32,6 +32,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+    <View style ={styles.title}>
+      <Text>Welcome</Text>
+    </View>
+
+    <View >
       <Start
           name={name}
           setName={setName}
@@ -49,14 +54,21 @@ export default function App() {
         />
       <StatusBar style="auto" />
     </View>
+
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: 30,
+    padding: 40,
+    fontWeight: 'bold',
   },
 });

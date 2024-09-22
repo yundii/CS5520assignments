@@ -34,14 +34,17 @@ const StartScreen = ({
         isChecked={isCheckboxChecked}
         setIsChecked={setIsCheckboxChecked}
         />
+
         <View style={styles.buttonContainer}>
-        <Button title="Reset" onPress={handleReset} />
+        <Button title="Reset" onPress={handleReset} color= 'red'/>
         <Button
           title="Register"
           onPress={handleRegister}
           disabled={!isCheckboxChecked}
+          color={isCheckboxChecked ? '#1976d2' : '#aaa'}
         />
         </View>
+
         </View>
         
     );
@@ -50,14 +53,14 @@ const StartScreen = ({
   const styles = StyleSheet.create({
     card: {
         padding: 20,
-        borderRadius: 10,
+        borderRadius: 15,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
         elevation: 5,
-        backgroundColor: '#fff',
-        marginBottom: 20,
+        backgroundColor: '#f0f0f0', // Light grey background for the card
+        width: '90%', // Adjust width to fit screen
       },
       buttonContainer: {
         flexDirection: 'row',

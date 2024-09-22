@@ -24,10 +24,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   checked: {
-    backgroundColor: '#000',
+    backgroundColor: '#1976d2',
   },
   label: {
     fontSize: 16,
+    color: '#1976d2',
   },
 });
 
