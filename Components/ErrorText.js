@@ -7,7 +7,7 @@ const ErrorText = ({ children }) => {
 
 const styles = StyleSheet.create({
   errorText: {
-    color: 'red',
+    color: 'grey',
     marginTop: 5,
   },
 });

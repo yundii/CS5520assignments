@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert} from 'react-native';
 import React, {useState} from 'react';
 import Start from './screens/Start';
+import Confirm from './screens/Confirm';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function App() {
@@ -19,7 +21,7 @@ export default function App() {
     if (isValidName && isValidEmail && isValidPhone) {
       setCurrentScreen('confirm');
     } else {
-      Alert.alert('Error', 'Please fill in all fields correctly.');
+      Alert.alert('Invalid Input', 'Check the input values');
     }
   };
 
@@ -31,12 +33,17 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['lightblue', '#C9C9E3']} // Gradient from blue to lighter blue
+      style={styles.background}
+    >
     <View style ={styles.title}>
       <Text>Welcome</Text>
     </View>
 
-    <View >
+    
+    <View style={styles.container}>
+    {currentScreen === 'start' ? (
       <Start
           name={name}
           setName={setName}
@@ -52,17 +59,25 @@ export default function App() {
           handleRegister={handleRegister}
           handleReset={handleReset}
         />
+        ) : (
+          <Confirm
+            name={name}
+            email={email}
+            phone={phone}
+            goBack={() => setCurrentScreen('start')}
+            continue={() => Alert.alert('Game Screen', 'Proceeding to the game')}
+          />
+        )}
       <StatusBar style="auto" />
     </View>
-
-    </View>
+    
+  </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -70,5 +85,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     padding: 40,
     fontWeight: 'bold',
+  },
+  container: {
+    width: '100%',
+    paddingHorizontal: 20,
   },
 });

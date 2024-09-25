@@ -59,8 +59,8 @@ const StartScreen = ({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         elevation: 5,
-        backgroundColor: '#f0f0f0', // Light grey background for the card
-        width: '90%', // Adjust width to fit screen
+        backgroundColor: '#f0f0f0',
+        width: '90%',
       },
       buttonContainer: {
         flexDirection: 'row',

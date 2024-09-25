@@ -13,7 +13,9 @@ const InputField = ({ label, value, onChangeText, isValid, errorMessage }) => {
         placeholder={label}
         placeholderTextColor="#999"
       />
-      {!isValid && <ErrorText>{errorMessage}</ErrorText>}
+      {value.length > 0 && !isValid && (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      )}
     </View>
   );
 };
