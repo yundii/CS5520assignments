@@ -15,7 +15,9 @@ export default function App() {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const isValidName = name.length > 1 && isNaN(name);
-  const isValidEmail = email.includes('@') && email.includes('.');
+  const isValidEmail = email.includes('@') && email.includes('.') &&
+    email.indexOf('@') > 0 && email.indexOf('.') > email.indexOf('@') + 1 && 
+    email.indexOf('.') < email.length - 1;
   const isValidPhone = phone.length === 10 && !isNaN(phone) && phone[9] !== '0' && phone[9] !== '1';
 
   const handleRegister = () => {
