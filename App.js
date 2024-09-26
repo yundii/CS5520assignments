@@ -43,13 +43,10 @@ export default function App() {
       colors={['lightblue', '#8573C7']} 
       style={styles.background}
     >
-    <View style ={styles.title}>
-      <Text>Welcome</Text>
-    </View>
-
-    
+   
     <View style={styles.container}>
     {currentScreen === 'start' ? (
+      
       <Start
           name={name}
           setName={setName}
@@ -89,13 +86,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 30,
-    padding: 40,
-    fontWeight: 'bold',
-  },
   container: {
     width: '100%',
     paddingHorizontal: 20,
+    alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

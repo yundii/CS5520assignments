@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import StartCard from './StartCard';
-import GuessCard from './GuessCard';
-import GameOverCard from './GameOverCard';
-import SuccessCard from './SuccessCard';
+import { View, Button, Alert, StyleSheet } from 'react-native';
+import StartCard from '../Components/StartCard';
+import GuessCard from '../Components/GuessCard';
+import GameOverCard from '../Components/GameOverCard';
+import SuccessCard from '../Components/SuccessCard';
 
 const GameScreen = ({ phone, resetGame }) => {
   const [chosenNumber, setChosenNumber] = useState(null);
@@ -44,6 +44,7 @@ const GameScreen = ({ phone, resetGame }) => {
       alert('Invalid Guess. Please enter a number between 1 and 100.');
       return;
     }
+    setAttempts(attempts - 1);
     if (guessedNumber === chosenNumber) {
       setGameWon(true);
       setGameOver(true);
@@ -51,6 +52,8 @@ const GameScreen = ({ phone, resetGame }) => {
       setAttempts(attempts - 1);
       if (attempts === 1) {
         setGameOver(true);
+      } else {
+        Alert.alert(guessedNumber < chosenNumber ? 'Higher!' : 'Lower!');
       }
     }
   };
@@ -74,6 +77,7 @@ const GameScreen = ({ phone, resetGame }) => {
 
   return (
     <View style={styles.container}>
+        <Button title="Restart" onPress={resetGame} style={styles.restartButton} />
       {showModal ? (
         <GuessCard
           guess={guess}
@@ -83,19 +87,26 @@ const GameScreen = ({ phone, resetGame }) => {
           handleGuess={handleGuess}
           handleHint={handleHint}
           hintUsed={hintUsed}
+          lastDigit={lastDigit}
         />
       ) : (
-        <StartCard onStart={() => setShowModal(true)} />
+        <StartCard onStart={() => setShowModal(true)} lastDigit={lastDigit}/>
       )}
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+  },
+  restartButton: {
+    position: 'absolute', // Position it absolutely
+    top: 40, // Adjust as needed
+    right: 200, // Adjust as needed
   },
 });
 

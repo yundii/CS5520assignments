@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, Text } from 'react-native';
 import InputField from '../Components/InputField';
 import Checkbox from '../Components/Checkbox';
 
@@ -8,6 +8,8 @@ const StartScreen = ({
     isValidName, isValidEmail, isValidPhone, handleRegister, handleReset,
   }) => {
     return (
+      <View>
+        <Text style= {styles.title}>Welcome</Text>
         <View style={styles.card}>
         <InputField
           label="Name"
@@ -46,6 +48,7 @@ const StartScreen = ({
         </View>
 
         </View>
+      </View>
         
     );
   };
@@ -61,11 +64,22 @@ const StartScreen = ({
         elevation: 5,
         backgroundColor: '#f0f0f0',
         width: '90%',
+        height: '70%',
+        
       },
       buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 20,
+      },
+      title: {
+        fontSize: 30,
+        padding: 40,
+        fontWeight: 'bold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 60,
+        marginLeft: 55,
       },
   });
   
