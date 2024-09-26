@@ -4,16 +4,19 @@ import StartCard from '../Components/StartCard';
 import GuessCard from '../Components/GuessCard';
 import GameOverCard from '../Components/GameOverCard';
 import SuccessCard from '../Components/SuccessCard';
+import WrongGuessCard from '../Components/WrongGuessCard';
 
 const GameScreen = ({ phone, resetGame }) => {
   const [chosenNumber, setChosenNumber] = useState(null);
   const [guess, setGuess] = useState('');
   const [attempts, setAttempts] = useState(4);
   const [timeLeft, setTimeLeft] = useState(60);
+  const [timerStarted, setTimerStarted] = useState(false);
   const [hintUsed, setHintUsed] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [guessWrong, setGuessWrong] = useState(null);
 
   const lastDigit = parseInt(phone[9]);
 
@@ -30,13 +33,13 @@ const GameScreen = ({ phone, resetGame }) => {
 
   useEffect(() => {
     // Countdown timer
-    if (timeLeft > 0 && !gameOver) {
+    if (timerStarted && timeLeft > 0 && !gameOver) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setGameOver(true);
     }
-  }, [timeLeft, gameOver]);
+  }, [timeLeft, gameOver, timerStarted]);
 
   const handleGuess = () => {
     const guessedNumber = parseInt(guess);
@@ -49,11 +52,10 @@ const GameScreen = ({ phone, resetGame }) => {
       setGameWon(true);
       setGameOver(true);
     } else {
-      setAttempts(attempts - 1);
+      // setAttempts(attempts - 1);
+      setGuessWrong(guessedNumber < chosenNumber ? 'higher' : 'lower');
       if (attempts === 1) {
         setGameOver(true);
-      } else {
-        Alert.alert(guessedNumber < chosenNumber ? 'Higher!' : 'Lower!');
       }
     }
   };
@@ -75,9 +77,23 @@ const GameScreen = ({ phone, resetGame }) => {
     );
   }
 
+  if (guessWrong) {
+    // If guess was wrong, show GuessWrong component
+    return <WrongGuessCard guessWrong={guessWrong} resetGame={resetGame} setGuessWrong={setGuessWrong} />;
+  }
+
+  const startGame = () => {
+    setShowModal(true);
+    setTimerStarted(true); // Start the timer when user presses start
+  };
+
   return (
-    <View style={styles.container}>
+    <View>
+    <View style={styles.ButtonContainer}>
         <Button title="Restart" onPress={resetGame} style={styles.restartButton} />
+    </View>
+
+    <View style={styles.container}>
       {showModal ? (
         <GuessCard
           guess={guess}
@@ -90,23 +106,29 @@ const GameScreen = ({ phone, resetGame }) => {
           lastDigit={lastDigit}
         />
       ) : (
-        <StartCard onStart={() => setShowModal(true)} lastDigit={lastDigit}/>
+        <StartCard onStart={() => startGame()} lastDigit={lastDigit} />
       )}
       
+    </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
   },
   restartButton: {
-    position: 'absolute', // Position it absolutely
-    top: 40, // Adjust as needed
-    right: 200, // Adjust as needed
+    top: 40, 
+    right: 200, 
+  },
+  ButtonContainer: {
+    width: '100%',
+    paddingRight: 10,
+    marginBottom: 30,
+    marginLeft: 320,
   },
 });
 

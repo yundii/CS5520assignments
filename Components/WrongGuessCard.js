@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-const GameOverCard = ({ timeLeft, resetGame }) => {
+const GuessWrong = ({ guessWrong, resetGame, setGuessWrong }) => {
   return (
     <View>
         <View style={styles.ButtonContainer}>
         <Button title="Restart" onPress={resetGame} style={styles.restartButton} />
         </View>
     <View style={styles.container}>
-      <Text>The game is over</Text>
-      <Image source={require('../sad_smiley.png')} style={styles.image} />
-      <Text>{timeLeft === 0 ? 'You are out of time' : 'You are out of attempts'}</Text>
-      <Button title="New Game" onPress={resetGame} />
+      <Text style={styles.text}>You did not guess correct!</Text>
+      <Text style={styles.text}>You should guess {guessWrong}.</Text>
+      
+      <Button title="Try Again" onPress={() => setGuessWrong(null)} />
+      <Button title="End the game" onPress={resetGame} />
     </View>
     </View>
   );
@@ -23,15 +24,17 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  image: {
-    width: 100,
-    height: 100,
-    margin: 10,
+  text: {
+    fontSize: 16,
+    marginBottom: 10,
+    color: '#512da8',
+    textAlign: 'center',
   },
   restartButton: {
     top: 40, 
-    right: 200, 
+    right: 200,
   },
   ButtonContainer: {
     width: '100%',
@@ -41,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameOverCard;
+export default GuessWrong;

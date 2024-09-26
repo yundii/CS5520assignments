@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import ErrorText from './ErrorText';
 
 const InputField = ({ label, value, onChangeText, isValid, errorMessage }) => {
   return (
