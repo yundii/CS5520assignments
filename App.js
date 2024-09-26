@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Alert} from 'react-native';
 import React, {useState} from 'react';
 import Start from './screens/Start';
 import Confirm from './screens/Confirm';
+import Game from './screens/Game';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -32,9 +33,14 @@ export default function App() {
     setIsCheckboxChecked(false);
   };
 
+  const handleRestartGame = () => {
+    handleReset();
+    setCurrentScreen('start');
+  };
+
   return (
     <LinearGradient
-      colors={['lightblue', '#C9C9E3']} // Gradient from blue to lighter blue
+      colors={['lightblue', '#8573C7']} 
       style={styles.background}
     >
     <View style ={styles.title}>
@@ -59,15 +65,17 @@ export default function App() {
           handleRegister={handleRegister}
           handleReset={handleReset}
         />
-        ) : (
+        ) : currentScreen === 'confirm' ? (
           <Confirm
             name={name}
             email={email}
             phone={phone}
             goBack={() => setCurrentScreen('start')}
-            continue={() => Alert.alert('Game Screen', 'Proceeding to the game')}
+            continue={() => setCurrentScreen('game')}
           />
-        )}
+        ) : (
+            <Game phone={phone} resetGame={handleRestartGame} />
+      )}
       <StatusBar style="auto" />
     </View>
     
