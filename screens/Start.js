@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Button, StyleSheet, Text } from 'react-native';
 import InputField from '../Components/InputField';
 import Checkbox from '../Components/Checkbox';
+import Confirm from '../Components/ConfirmCard';
 
 const StartScreen = ({
     name, setName, email, setEmail, phone, setPhone, isCheckboxChecked, setIsCheckboxChecked,
-    isValidName, isValidEmail, isValidPhone, handleRegister, handleReset,
+    isValidName, isValidEmail, isValidPhone, handleRegister, handleReset, modalVisible, setModalVisible, setCurrentScreen
   }) => {
     return (
       <View>
@@ -48,6 +49,17 @@ const StartScreen = ({
         </View>
 
         </View>
+        <Confirm
+            name={name}
+            email={email}
+            phone={phone}
+            modalVisible={modalVisible}
+            goBack={() => {setCurrentScreen('start'); setModalVisible(false);}}
+            continue={() => {
+              setModalVisible(false);
+              setCurrentScreen('game');
+            }}
+          />
       </View>
         
     );

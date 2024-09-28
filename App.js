@@ -2,10 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Alert} from 'react-native';
 import React, {useState} from 'react';
 import Start from './screens/Start';
-import Confirm from './screens/Confirm';
 import Game from './screens/Game';
 import { LinearGradient } from 'expo-linear-gradient';
-
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('start');
@@ -13,6 +11,7 @@ export default function App() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const isValidName = name.length > 1 && isNaN(name);
   const isValidEmail = email.includes('@') && email.includes('.') &&
@@ -22,7 +21,7 @@ export default function App() {
 
   const handleRegister = () => {
     if (isValidName && isValidEmail && isValidPhone) {
-      setCurrentScreen('confirm');
+      setModalVisible(true);
     } else {
       Alert.alert('Invalid Input', 'Check the input values');
     }
@@ -63,18 +62,12 @@ export default function App() {
           setIsCheckboxChecked={setIsCheckboxChecked}
           handleRegister={handleRegister}
           handleReset={handleReset}
-        />
-        ) : currentScreen === 'confirm' ? (
-          <Confirm
-            name={name}
-            email={email}
-            phone={phone}
-            goBack={() => setCurrentScreen('start')}
-            continue={() => setCurrentScreen('game')}
-          />
-        ) : (
-            <Game phone={phone} resetGame={handleRestartGame} />
-      )}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setCurrentScreen={setCurrentScreen}
+          
+        />)
+      : currentScreen === 'game' ? (<Game phone={phone} resetGame={handleRestartGame} />) : null} 
       <StatusBar style="auto" />
     </View>
     
