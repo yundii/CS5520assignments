@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
+import Colors from './Colors';
 
 const InputField = ({ label, value, onChangeText, isValid, errorMessage }) => {
   return (
@@ -10,10 +11,10 @@ const InputField = ({ label, value, onChangeText, isValid, errorMessage }) => {
         value={value}
         onChangeText={onChangeText}
         placeholder={label}
-        placeholderTextColor="#999"
+        placeholderTextColor={Colors.placeholder}
       />
       {value.length > 0 && !isValid && (
-        <Text style={styles.errorText}>{errorMessage}</Text>
+        <Text>{errorMessage}</Text>
       )}
     </View>
   );
@@ -25,13 +26,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    borderBottomColor: '#1976d2',
+    borderBottomColor: Colors.primary,
     padding: 8,
     marginTop: 5,
   },
   label: {
     fontSize: 18,
-    color: '#1976d2',
+    color: Colors.primary,
   },
 });
 

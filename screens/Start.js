@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Button, StyleSheet, Text } from 'react-native';
-import InputField from '../Components/InputField';
-import Checkbox from '../Components/Checkbox';
-import Confirm from '../Components/ConfirmCard';
+import InputField from '../CommonComponents/InputField';
+import Checkbox from '../CommonComponents/Checkbox';
+import Confirm from '../CardComponents/ConfirmCard';
+import Colors from '../CommonComponents/Colors';
+import Card from '../CommonComponents/Card';
 
 const StartScreen = ({
     name, setName, email, setEmail, phone, setPhone, isCheckboxChecked, setIsCheckboxChecked,
@@ -11,7 +13,7 @@ const StartScreen = ({
     return (
       <View>
         <Text style= {styles.title}>Welcome</Text>
-        <View style={styles.card}>
+        <Card style={styles.card}>
         <InputField
           label="Name"
           value={name}
@@ -39,16 +41,16 @@ const StartScreen = ({
         />
 
         <View style={styles.buttonContainer}>
-        <Button title="Reset" onPress={handleReset} color= 'red'/>
+        <Button title="Reset" onPress={handleReset} color={Colors.redButton}/>
         <Button
           title="Register"
           onPress={handleRegister}
           disabled={!isCheckboxChecked}
-          color={isCheckboxChecked ? '#1976d2' : '#aaa'}
+          color={isCheckboxChecked ? Colors.primary : Colors.disabled}
         />
         </View>
 
-        </View>
+        </Card>
         <Confirm
             name={name}
             email={email}
@@ -68,13 +70,6 @@ const StartScreen = ({
   const styles = StyleSheet.create({
     card: {
         padding: 20,
-        borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 5,
-        backgroundColor: '#f0f0f0',
         width: '90%',
         height: '70%',
         

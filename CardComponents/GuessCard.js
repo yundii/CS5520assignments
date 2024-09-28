@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import Card from '../CommonComponents/Card';
+import Colors from '../CommonComponents/Colors';
 
 const GuessCard = ({ guess, setGuess, timeLeft, attempts, handleGuess, handleHint, hintUsed, lastDigit }) => {
   return (
-    <View style={styles.container}>
+    <Card>
         <Text style={styles.text}>Guess a number between 1 & 100 that is multiply of {lastDigit}.</Text>
         <TextInput
         style={styles.input}
@@ -16,16 +18,11 @@ const GuessCard = ({ guess, setGuess, timeLeft, attempts, handleGuess, handleHin
         <Text style={styles.text}>Timer: {timeLeft}s</Text>
         <Button title="Use a hint" onPress={handleHint} disabled={hintUsed} />
         <Button title="Submit guess" onPress={handleGuess} />
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#C9C9E3',
-    padding: 20,
-    borderRadius: 10,
-  },
   input: {
     borderBottomWidth: 1,
     marginBottom: 10,
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     marginBottom: 10,
-    color: '#512da8',
+    color: Colors.textPrimary,
     textAlign: 'center',
   },
 });

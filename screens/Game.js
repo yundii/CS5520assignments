@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, Alert, StyleSheet } from 'react-native';
-import StartCard from '../Components/StartCard';
-import GuessCard from '../Components/GuessCard';
-import GameOverCard from '../Components/GameOverCard';
-import SuccessCard from '../Components/SuccessCard';
-import WrongGuessCard from '../Components/WrongGuessCard';
+import StartCard from '../CardComponents/StartCard';
+import GuessCard from '../CardComponents/GuessCard';
+import GameOverCard from '../CardComponents/GameOverCard';
+import WrongGuessCard from '../CardComponents/WrongGuessCard';
+import RestartButton from '../CommonComponents/RestartButton';
 
 const GameScreen = ({ phone, resetGame }) => {
   const [chosenNumber, setChosenNumber] = useState(null);
@@ -70,11 +70,7 @@ const GameScreen = ({ phone, resetGame }) => {
   };
 
   if (gameOver) {
-    return gameWon ? (
-      <SuccessCard chosenNumber={chosenNumber} attempts={4 - attempts} resetGame={resetGame} />
-    ) : (
-      <GameOverCard timeLeft={timeLeft} resetGame={resetGame} />
-    );
+    return <GameOverCard chosenNumber={chosenNumber} attempts={4 - attempts} resetGame={resetGame} gameWon= {gameWon} timeLeft={timeLeft}/>;
   }
 
   if (guessWrong) {
@@ -89,9 +85,7 @@ const GameScreen = ({ phone, resetGame }) => {
 
   return (
     <View>
-    <View style={styles.ButtonContainer}>
-        <Button title="Restart" onPress={resetGame} style={styles.restartButton} />
-    </View>
+        <RestartButton onPress={resetGame}/>
 
     <View style={styles.container}>
       {showModal ? (
@@ -116,19 +110,8 @@ const GameScreen = ({ phone, resetGame }) => {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  restartButton: {
-    top: 40, 
-    right: 200, 
-  },
-  ButtonContainer: {
-    width: '100%',
-    paddingRight: 10,
-    marginBottom: 30,
-    marginLeft: 320,
   },
 });
 

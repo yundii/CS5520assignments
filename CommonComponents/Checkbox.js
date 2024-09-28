@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import Colors from './Colors';
 
 const Checkbox = ({ isChecked, setIsChecked }) => {
   return (
@@ -20,15 +21,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderWidth: 2,
-    borderColor: '#000',
     marginRight: 10,
   },
   checked: {
-    backgroundColor: '#1976d2',
+    backgroundColor: Colors.primary,
   },
   label: {
     fontSize: 16,
-    color: '#1976d2',
+    color: Colors.primary,
   },
 });
 
