@@ -7,7 +7,7 @@ import RestartButton from '../CommonComponents/RestartButton';
 const GuessWrong = ({ guessWrong, resetGame, setGuessWrong }) => {
   return (
     <View>
-        <RestartButton onPress={resetGame} />
+        <RestartButton resetGame={resetGame} />
     <Card style={styles.container}>
       <Text style={styles.text}>You did not guess correct!</Text>
       <Text style={styles.text}>You should guess {guessWrong}.</Text>

@@ -85,7 +85,7 @@ const GameScreen = ({ phone, resetGame }) => {
 
   return (
     <View>
-        <RestartButton onPress={resetGame}/>
+        <RestartButton resetGame={resetGame}/>
 
     <View style={styles.container}>
       {showModal ? (

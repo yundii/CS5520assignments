@@ -7,7 +7,7 @@ import RestartButton from '../CommonComponents/RestartButton';
 const GameOverCard = ({ chosenNumber, attempts, resetGame, gameWon, timeLeft }) => {
   return (
     <View >
-        <RestartButton onPress={resetGame}/>
+        <RestartButton resetGame={resetGame}/>
     <Card style={styles.container}>
     {gameWon ? (
           <View>
